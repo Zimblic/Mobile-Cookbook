@@ -1,6 +1,19 @@
-﻿using System;
+﻿//
+//  Copyright (c) 2016 MatchboxMobile
+//  Licensed under The MIT License (MIT)
+//  http://opensource.org/licenses/MIT
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED 
+//  TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL
+//  THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF
+//  CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+//  IN THE SOFTWARE.
+//
+
+using System;
 using Xamarin.Forms;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace PocketChef
 {
@@ -23,11 +36,11 @@ namespace PocketChef
             // 180 / pi
             const float DegreesToRadians = 57.2957795f;
             // higher the number less the rotation effect
-            const float CardRotationAdjuster = 0.3f;
+            const float CardRotationAdjuster = 0.8f;
             // distance a card must be moved to consider to be swiped off
             public int CardMoveDistance { get; set; }
 
-            // two cards
+            // two cards - top, bottom underneath
             const int NumCards = 2;
             Card[] cards = new Card[NumCards];
             // the card at the top of the stack
@@ -42,7 +55,7 @@ namespace PocketChef
             public Action<int> SwipedRight = null;
             public Action<int> SwipedLeft = null;
 
-            public static readonly BindableProperty ItemsSourceProperty =
+        public static readonly BindableProperty ItemsSourceProperty =
                 BindableProperty.Create(nameof(ItemsSource), typeof(System.Collections.IList), typeof(Deck), null,
                 propertyChanged: OnItemsSourcePropertyChanged);
 
@@ -91,7 +104,7 @@ namespace PocketChef
                     );
                 }
 
-                this.BackgroundColor = Color.AliceBlue;
+                this.BackgroundColor = Color.FromHex("272727");
                 this.Content = view;
 
                 var panGesture = new PanGestureRecognizer();
@@ -110,7 +123,6 @@ namespace PocketChef
                     if (itemIndex >= ItemsSource.Count) break;
                     var card = cards[i];
                     card.Name.Text = ItemsSource[itemIndex].Name;
-                    card.Recipe.Text = ItemsSource[itemIndex].Recipe;
                     card.Food.Source = ImageSource.FromFile(ItemsSource[itemIndex].Food);
                     card.IsVisible = true;
                     card.Scale = GetScale(i);
@@ -143,7 +155,7 @@ namespace PocketChef
                 cardDistance = 0;
             }
 
-            // to handle te ongoing touch event as the card is moved
+            // to handle the ongoing touch event as the card is moved
             public void HandleTouch(float diff_x)
             {
                 if (ignoreTouch)
@@ -194,8 +206,10 @@ namespace PocketChef
                     if (SwipedRight != null && cardDistance > 0)
                     {
                         SwipedRight(itemIndex);
+                        topCardIndex = 0;
+                        
                     }
-                    else if (SwipedLeft != null)
+                else if (SwipedLeft != null)
                     {
                         SwipedLeft(itemIndex);
                     }
@@ -233,8 +247,8 @@ namespace PocketChef
                 var topCard = cards[topCardIndex];
                 topCardIndex = NextCardIndex(topCardIndex);
 
-                // if there are more cards to show, show the next card in to place of 
-                // the card that was swipped off the screen
+                // if there are more cards to show, show the next card in the place of 
+                // the card that was swiped off the screen
                 if (itemIndex < ItemsSource.Count)
                 {
                     // push it to the back z order
@@ -247,7 +261,6 @@ namespace PocketChef
 
                     // set the data
                     topCard.Name.Text = ItemsSource[itemIndex].Name;
-                    topCard.Recipe.Text = ItemsSource[itemIndex].Recipe;
                     topCard.Food.Source = ImageSource.FromFile(ItemsSource[itemIndex].Food);
 
                     topCard.IsVisible = true;
@@ -261,7 +274,7 @@ namespace PocketChef
                 return topIndex == 0 ? 1 : 0;
             }
 
-            // return the prev card index from the yop
+            // return the prev card index from the top
             int PrevCardIndex(int topIndex)
             {
                 return topIndex == 0 ? 1 : 0;
@@ -272,5 +285,6 @@ namespace PocketChef
             {
                 return (index == topCardIndex) ? 1.0f : BackCardScale;
             }
-        }
+
+    }
     }

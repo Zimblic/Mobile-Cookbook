@@ -1,3 +1,4 @@
-﻿<forms:WindowsPage>
-    xmlns:forms="using:Xamarin.Forms.PocketChef.UWP"
-</forms:WindowsPage>
+﻿<Page>
+    uwp:WindowsPage
+    xmlns:uwp="using:Xamarin.Forms.Platform.UWP"
+</Page>

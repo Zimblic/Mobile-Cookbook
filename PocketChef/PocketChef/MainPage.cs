@@ -15,7 +15,7 @@ namespace PocketChef
         public MainPage()
         {
             this.BindingContext = model;
-            this.BackgroundColor = Color.Firebrick;
+            this.BackgroundColor = Color.FromHex("272727");
 
             RelativeLayout view = new RelativeLayout();
 
@@ -33,15 +33,44 @@ namespace PocketChef
                 stack.CardMoveDistance = (int)(this.Width * 0.60f);
             };
             this.Content = view;
+            Button RecButt = new Button
+            {
+                Text = "See This Recipe!",
+                TextColor = Color.White,
+                BackgroundColor = Color.FromHex("900C3F"),
+                BorderRadius = 10,
+                FontSize = 20,
+                HorizontalOptions = LayoutOptions.Center,
+                VerticalOptions = LayoutOptions.Center,
+                InputTransparent = true,
+            };
+            view.Children.Add(RecButt,
+             Constraint.Constant(0),
+                 Constraint.RelativeToParent((parent) =>
+                 {
+                     return parent.Height - 55;
+                 }),
+                 Constraint.RelativeToParent((parent) =>
+                 {
+                     return parent.Width;
+                 }),
+                 Constraint.Constant(40));
+            RecButt.Clicked += delegate {
+                DisplayAlert("Gesture Info", "Button Click Detected", "OK");
+            };
         }
         void SwipedLeft(int index)
         {
-
+            DisplayAlert("Gesture Info", "Swipe Left Detected", "OK");
         }
         void SwipedRight(int index)
         {
+            DisplayAlert("Gesture Info", "Swipe Right Detected", "OK");
         }
+
     }
-
-
 }
+
+
+
+        

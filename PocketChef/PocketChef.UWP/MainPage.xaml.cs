@@ -26,7 +26,7 @@ namespace PocketChef.UWP
         public MainPage()
         {
             this.InitializeComponent();
-            LoadApplication(new App());
+            LoadApplication(new PocketChef.App());
         }
 
     }

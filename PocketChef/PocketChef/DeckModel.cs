@@ -50,9 +50,11 @@ namespace PocketChef
 
         public DeckModel()
         {
-            items.Add(new Deck.Item() { Name = "Southwest Roast", Food = "one.jpg", Recipe = "Ingredients: 1 pork roast/n 1 can cream of mushroom /n" });
-            items.Add(new Deck.Item() { Name = "Twin Sister's Shrimp", Food = "two.jpg",  Recipe = "Ingredients:" });
-            items.Add(new Deck.Item() { Name = "Dish 3", Food = "three.jpg",  Recipe = "Ingredients:" });
+            items.Add(new Deck.Item() { Name = "Southwest Roast", Food = "one.jpg", Recipe = "Ingredients:\nPork Roast\n"});
+            items.Add(new Deck.Item() { Name = "Twin Sister's Shrimp", Food = "two.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Fettuccine Alfredo", Food = "three.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Golden Graham Bars", Food = "four.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "MOAR FOOD", Food = "five.jpg", Recipe = "" });
         }
     }
 }
