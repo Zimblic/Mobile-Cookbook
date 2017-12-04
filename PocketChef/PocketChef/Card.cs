@@ -27,12 +27,12 @@ namespace PocketChef
             //Image of Food
             Food = new Image() { InputTransparent = true, Aspect = Aspect.Fill };
             view.Children.Add(Food, Constraint.Constant(0),
-                Constraint.RelativeToParent((parent) => { double h = parent.Height * 0.8;
-                    return ((parent.Height - h) / 2) + 20; }),
+                Constraint.RelativeToParent((parent) => {
+                    double h = parent.Height * 0.8;
+                    return ((parent.Height - h) / 2) + 20;
+                }),
                 Constraint.RelativeToParent((parent) => { return parent.Width; }),
                 Constraint.RelativeToParent((parent) => { return (parent.Height * 0.8); }));
-
-
 
 
             Content = view;

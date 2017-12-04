@@ -52,9 +52,14 @@ namespace PocketChef
         {
             items.Add(new Deck.Item() { Name = "Southwest Roast", Food = "one.jpg", Recipe = "Ingredients:\nPork Roast\n"});
             items.Add(new Deck.Item() { Name = "Twin Sister's Shrimp", Food = "two.jpg", Recipe = "" });
-            items.Add(new Deck.Item() { Name = "Fettuccine Alfredo", Food = "three.jpg", Recipe = "" });
-            items.Add(new Deck.Item() { Name = "Golden Graham Bars", Food = "four.jpg", Recipe = "" });
-            items.Add(new Deck.Item() { Name = "MOAR FOOD", Food = "five.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Chicken Fettuccine Alfredo", Food = "three.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Mac Daddy Mac n' Cheese", Food = "four.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Caribbean Chicken", Food = "five.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Pomegranate Sangria", Food = "six.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Golden Graham Bars", Food = "seven.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Armadillo Eggs", Food = "eight.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Loaded Mashed Potatoes", Food = "nine.jpg", Recipe = "" });
+            items.Add(new Deck.Item() { Name = "Chipotle Chicken Sliders", Food = "ten.jpg", Recipe = "" });
         }
     }
 }
