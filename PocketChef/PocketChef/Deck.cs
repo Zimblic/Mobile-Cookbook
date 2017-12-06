@@ -28,10 +28,10 @@ namespace PocketChef
             public string Recipe { get; set; }
         };
 
-        int[] cardnum = Enumerable.Range(0, 20).ToArray();
+        int[] cardnum = Enumerable.Range(0, 20).ToArray(); //Array for card pointers.
         //int[] cardsaved;
-        public int c = 0;
-        public int removed = 0;
+        public int c = 0; //Index of cardnum array.
+        public int removed = 0; //# of cards removed.
         // back card scale
         const float BackCardScale = 0.8f;
         // speed of the animations
@@ -106,7 +106,7 @@ namespace PocketChef
                 );
             }
 
-            this.BackgroundColor = Color.FromHex("272727");
+            this.BackgroundColor = Color.FromHex("C6B2C6");
             this.Content = view;
 
             var panGesture = new PanGestureRecognizer();
@@ -115,7 +115,7 @@ namespace PocketChef
 
         }
 
-        void Setup()
+        void Setup() //Creates first 2 cards
         {
            
             // set the top card
@@ -219,8 +219,8 @@ namespace PocketChef
                 else if (SwipedLeft != null)
                 {
                     SwipedLeft(itemIndex);
-                    cardnum = cardnum.Where((val) => val != itemIndex).ToArray();
-                    removed++;
+                    cardnum = cardnum.Where((val) => val != itemIndex-1).ToArray(); //Removes swiped card.
+                    removed++; //# of cards removed.
                 }
 
                 // show the next card
@@ -245,7 +245,7 @@ namespace PocketChef
         }
 
         // show the next two cards
-        void ShowNextCard()
+        void ShowNextCard() //Loads the rest of the card deck.
         {
             if (cards[0].IsVisible == false && cards[1].IsVisible == false) //1st 2 cards gone, load more
             {
@@ -260,7 +260,7 @@ namespace PocketChef
             // the card that was swiped off the screen
             if (itemIndex < ItemsSource.Count || c < (ItemsSource.Count - removed))
             {
-                itemIndex = cardnum[c];
+                itemIndex = cardnum[c]; //Sets card to what's left of array.
                 // push it to the back z order
                 ((RelativeLayout)this.Content).LowerChild(topCard);
 
