@@ -2,6 +2,8 @@
 using System.Runtime.CompilerServices;
 using System.ComponentModel;
 using System.Collections.Generic;
+using System.Linq;
+using System.Threading;
 
 namespace PocketChef
 {
@@ -9,7 +11,8 @@ namespace PocketChef
     public class DeckModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        List<Deck.Item> items = new List<Deck.Item>();
+        List<Deck.Item> items = new List<Deck.Item>(); //Deck = index. Item = Information
+
         public List<Deck.Item> ItemsList
         {
             get
@@ -28,7 +31,7 @@ namespace PocketChef
 
         }
 
-        protected virtual void OnPropertyChanged ([CallerMemberName] string propertyName = null)
+        protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
             PropertyChangedEventHandler handler = PropertyChanged;
             if (handler != null)
@@ -50,7 +53,7 @@ namespace PocketChef
 
         public DeckModel()
         {
-            items.Add(new Deck.Item() { Name = "Southwest Roast", Food = "one.jpg", Recipe = "Ingredients:\nPork Roast\n"});
+            items.Add(new Deck.Item() { Name = "Southwest Roast", Food = "one.jpg", Recipe = "Ingredients:\nPork Roast\n" });
             items.Add(new Deck.Item() { Name = "Twin Sister's Shrimp", Food = "two.jpg", Recipe = "" });
             items.Add(new Deck.Item() { Name = "Chicken Fettuccine Alfredo", Food = "three.jpg", Recipe = "" });
             items.Add(new Deck.Item() { Name = "Mac Daddy Mac n' Cheese", Food = "four.jpg", Recipe = "" });
@@ -61,5 +64,7 @@ namespace PocketChef
             items.Add(new Deck.Item() { Name = "Loaded Mashed Potatoes", Food = "nine.jpg", Recipe = "" });
             items.Add(new Deck.Item() { Name = "Chipotle Chicken Sliders", Food = "ten.jpg", Recipe = "" });
         }
+
+
     }
 }

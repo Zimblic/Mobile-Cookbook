@@ -9,8 +9,6 @@ namespace PocketChef
 {
     public class MainPage : ContentPage
     {
-
-
         Deck stack;
         DeckModel model = new DeckModel();
 
@@ -40,7 +38,6 @@ namespace PocketChef
                 Text = "Recipe",
                 TextColor = Color.White,
                 BackgroundColor = Color.FromHex("900C3F"),
-                
                 BorderRadius = 10,
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Center,
@@ -68,11 +65,12 @@ namespace PocketChef
         }
         void SwipedLeft(int index)
         {
-            DisplayAlert("Gesture Info", "Swipe Left Detected", "OK");
+            //DisplayAlert("Gesture Info", "Swipe Left Detected", "OK");
+
         }
         void SwipedRight(int index)
         {
-            DisplayAlert("Gesture Info", "Swipe Right Detected", "OK");
+           // DisplayAlert("Gesture Info", "Swipe Right Detected", "OK");
         }
     }
 }

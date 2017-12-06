@@ -28,7 +28,10 @@ namespace PocketChef
             public string Recipe { get; set; }
         };
 
-
+        int[] cardnum = Enumerable.Range(0, 20).ToArray();
+        //int[] cardsaved;
+        public int c = 0;
+        public int removed = 0;
         // back card scale
         const float BackCardScale = 0.8f;
         // speed of the animations
@@ -80,7 +83,6 @@ namespace PocketChef
         public Deck()
         {
             RelativeLayout view = new RelativeLayout();
-
             // create a stack of cards
             for (int i = 0; i < NumCards; i++)
             {
@@ -115,17 +117,18 @@ namespace PocketChef
 
         void Setup()
         {
-            Random rand = new Random();
+           
             // set the top card
             topCardIndex = 0;
             // create a stack of cards
+
             for (int i = 0; i < Math.Min(NumCards, ItemsSource.Count); i++)
             {
 
-               itemIndex = rand.Next(0, ItemsSource.Count); //Random cards
-
-                //if (itemIndex >= ItemsSource.Count) break;
-
+                itemIndex = cardnum[c];
+                
+                if (itemIndex >= ItemsSource.Count) break;
+                
                 var card = cards[i];
                 card.Name.Text = ItemsSource[itemIndex].Name;
                 card.Food.Source = ImageSource.FromFile(ItemsSource[itemIndex].Food);
@@ -134,9 +137,7 @@ namespace PocketChef
                 card.RotateTo(0, 0);
                 card.TranslateTo(0, -card.Y, 0);
                 ((RelativeLayout)this.Content).LowerChild(card);
-                //ItemsSource.RemoveAt(itemIndex);
-
-
+                c++;
             }
         }
 
@@ -213,12 +214,13 @@ namespace PocketChef
                 if (SwipedRight != null && cardDistance > 0)
                 {
                     SwipedRight(itemIndex);
-
-
+                    //cardsaved[0] = itemIndex;
                 }
                 else if (SwipedLeft != null)
                 {
                     SwipedLeft(itemIndex);
+                    cardnum = cardnum.Where((val) => val != itemIndex).ToArray();
+                    removed++;
                 }
 
                 // show the next card
@@ -242,10 +244,10 @@ namespace PocketChef
             ignoreTouch = false;
         }
 
-        // show the next card
+        // show the next two cards
         void ShowNextCard()
         {
-            if (cards[0].IsVisible == false && cards[1].IsVisible == false)
+            if (cards[0].IsVisible == false && cards[1].IsVisible == false) //1st 2 cards gone, load more
             {
                 Setup();
                 return;
@@ -253,11 +255,12 @@ namespace PocketChef
 
             var topCard = cards[topCardIndex];
             topCardIndex = NextCardIndex(topCardIndex);
-
+            itemIndex = cardnum[c]; //INITIATES NEXT SET DO NOT REMOVE
             // if there are more cards to show, show the next card in the place of 
             // the card that was swiped off the screen
-            if (itemIndex < ItemsSource.Count)
+            if (itemIndex < ItemsSource.Count || c < (ItemsSource.Count - removed))
             {
+                itemIndex = cardnum[c];
                 // push it to the back z order
                 ((RelativeLayout)this.Content).LowerChild(topCard);
 
@@ -271,7 +274,11 @@ namespace PocketChef
                 topCard.Food.Source = ImageSource.FromFile(ItemsSource[itemIndex].Food);
 
                 topCard.IsVisible = true;
-                itemIndex++;
+                c++;
+            }
+            else if (itemIndex >= ItemsSource.Count || c >= (ItemsSource.Count - removed))
+            {
+                c = 0; //Restart the array with remaining cards - Forever loop
             }
         }
 
@@ -293,5 +300,21 @@ namespace PocketChef
             return (index == topCardIndex) ? 1.0f : BackCardScale;
         }
 
+    }
+    static class MyExtensions
+    {
+        private static Random rand = new Random();
+        public static void Shuffle<T>(this IList<T> list) //FisherYates Shuffler
+        {
+            int n = list.Count;
+            while (n > 1)
+            {
+                n--;
+                int k = rand.Next(n + 1);
+                T value = list[k];
+                list[k] = list[n];
+                list[n] = value;
+            }
+        }
     }
 }
