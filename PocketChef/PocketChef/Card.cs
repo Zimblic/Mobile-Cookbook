@@ -13,13 +13,13 @@ namespace PocketChef
             RelativeLayout view = new RelativeLayout();
 
             //Backdrop of the card
-            BoxView background = new BoxView { Color = Color.FromHex("C6B2C6"), InputTransparent = true };
+            BoxView background = new BoxView { Color = Color.FromHex("2C7873"), InputTransparent = true };
             view.Children.Add(background, Constraint.Constant(0), Constraint.Constant(0),
                 Constraint.RelativeToParent((parent) => { return parent.Width; }),
                 Constraint.RelativeToParent((parent) => { return parent.Height; }));
 
             //Name of the Food
-            Name = new Label() { TextColor = Color.FromHex("6D0545"), FontSize = 22, InputTransparent = true };
+            Name = new Label() { TextColor = Color.FromHex("ffffff"), FontSize = 22, InputTransparent = true };
             view.Children.Add(Name, Constraint.Constant(10), Constraint.Constant(10),
                 Constraint.RelativeToParent((parent) => { return parent.Width; }),
                 Constraint.Constant(28));

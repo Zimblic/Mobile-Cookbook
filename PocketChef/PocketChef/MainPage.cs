@@ -15,7 +15,7 @@ namespace PocketChef
         public MainPage()
         {
             this.BindingContext = model;
-            this.BackgroundColor = Color.FromHex("6D0545");
+            this.BackgroundColor = Color.FromHex("021C1E");
 
             RelativeLayout view = new RelativeLayout();
 
@@ -36,8 +36,8 @@ namespace PocketChef
             Button RecButt = new Button
             {
                 Text = "Recipe",
-                TextColor = Color.FromHex("6D0545"),
-                BackgroundColor = Color.FromHex("C6B2C6"),
+                TextColor = Color.FromHex("ffffff"),
+                BackgroundColor = Color.FromHex("2C7873"),
                 BorderRadius = 10,
                 FontSize = 20,
                 HorizontalOptions = LayoutOptions.Center,

@@ -106,7 +106,7 @@ namespace PocketChef
                 );
             }
 
-            this.BackgroundColor = Color.FromHex("C6B2C6");
+            this.BackgroundColor = Color.FromHex("021C1E");
             this.Content = view;
 
             var panGesture = new PanGestureRecognizer();
@@ -278,7 +278,7 @@ namespace PocketChef
             }
             else if (itemIndex >= ItemsSource.Count || c >= (ItemsSource.Count - removed))
             {
-                c = 0; //Restart the array with remaining cards - Forever loop
+                itemIndex = 0; c = 0; //Restart the array with remaining cards - Forever loop
             }
         }
 
